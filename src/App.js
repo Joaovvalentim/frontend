@@ -1,8 +1,9 @@
-import Home from "./screens/Home";
+import React from 'react';
 
+import Home from 'screens/Home';
 
 const App = () => {
-    return <Home/>
-}
+  return <Home />;
+};
 
-export default App
+export default App;

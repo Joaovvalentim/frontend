@@ -1,21 +1,23 @@
+import { useState, useEffect } from "react";
+import { doGetRequest } from "helpers/ApiHelper";
+import Block from "components/Block";
+import { bitcoinProcessor, currencyProcessor } from "helpers/ProcessorHelper"
 
-import { useState } from "react";
 
 const Home = () => {
-const result = useState()
-
-    fetch('/dashboard')
-        .then(response => response.json())
-        .then(({ data }) => {
-            console.log(data);
-        })
-        .catch(e => {
-            console.error(e)
-        })
-
-
-
-    return <h1>Home</h1>
+    const [data, setData] = useState(null)
+    useEffect(() => {
+        doGetRequest('/dashboard').then(({ data }) => setData(data))
+    }, []);
+    if (data) {
+        return (
+            <div>
+                <h1><Block data={data.bitcoin} label="Bitcoin" processor={bitcoinProcessor}/></h1>
+                <h1><Block data={data.currency} label="Currency" processor={currencyProcessor}/></h1>
+            </div>
+        )
+    }
+    return <h1>No data to display</h1>
 }
 
 export default Home
