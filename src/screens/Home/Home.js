@@ -13,15 +13,12 @@ import {
 const Home = () => {
   // Estado para armazenar os dados da API
   const [data, setData] = useState(null);
-
+    console.log(data)
   // Efeito colateral para carregar os dados da API quando o componente monta
   useEffect(() => {
     // Realiza uma requisição GET para obter os dados da API
     doGetRequest('/dashboard').then(({ data }) => setData(data));
   }, []);
-
-  // Log para depuração: exibe os dados recuperados da API
-  console.log('*** Home.data', data);
 
   // Renderização condicional com base nos dados recuperados da API
   if (data) {
